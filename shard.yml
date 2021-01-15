@@ -1,0 +1,28 @@
+name: heisenbot
+version: 0.1.0
+
+authors:
+  - Alexey Kutepov <reximkut@gmail.com>
+
+description: |
+  Just a simple twitch chat bot to try out Crystal Programming Lnaguage
+
+dependencies:
+  crirc:
+    github: Meoowww/Crirc
+    branch: master
+
+# dependencies:
+#   pg:
+#     github: will/crystal-pg
+#     version: "~> 0.5"
+
+# development_dependencies:
+#   webmock:
+#     github: manastech/webmock.cr
+
+targets:
+  heisenbot:
+    main: src/main.cr
+
+license: MIT

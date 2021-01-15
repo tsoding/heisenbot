@@ -1,0 +1,6 @@
+version: 2.0
+shards:
+  crirc:
+    git: https://github.com/Meoowww/Crirc.git
+    version: 0.5.1+git.commit.ffc405d1d4e271aa357c2bb20fc2bd2857b4d094
+
