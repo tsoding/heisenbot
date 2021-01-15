@@ -1,5 +1,6 @@
 require "json"
 require "crirc"
+require "http/client"
 
 include Crirc::Protocol
 
@@ -22,6 +23,12 @@ client.start do |bot|
   end.on("PRIVMSG", message: /^!gnip */) do |msg|
     chan = msg.arguments if msg.arguments
     bot.reply msg, "gnop" if chan
+  end.on("PRIVMSG", message: /^!weather (.*)/) do |msg, match|
+    unless match.nil?
+      location = match[1]
+      response = HTTP::Client.get "http://wttr.in/#{URI.encode(location)}?format=4"
+      bot.reply msg, response.body unless response.body.nil?
+    end
   end
 
   loop do
