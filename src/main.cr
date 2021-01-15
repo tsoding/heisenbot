@@ -9,6 +9,19 @@ if ARGV.size == 0
 end
 
 secret = JSON.parse(File.read(ARGV[0]))
+
+def twitch_id_by_name(name : String, secret): String | Nil
+  response = HTTP::Client.get "https://api.twitch.tv/helix/users?login=#{URI.encode(name)}",
+                             headers: HTTP::Headers{"Authorization" => "Bearer #{secret["twitch"]["token"].to_s}",
+                                                    "Client-Id" => secret["twitch"]["clientId"].to_s}
+  data = JSON.parse(response.body)["data"]?
+
+  unless data.nil? || data.size == 0
+    id = data[0]["id"]
+    return id.to_s unless id.nil?
+  end
+end
+
 client = Crirc::Network::Client.new nick: secret["twitch"]["account"].to_s,
                                     ip: "irc.chat.twitch.tv",
                                     port: 6697,
@@ -28,6 +41,12 @@ client.start do |bot|
       location = match[1]
       response = HTTP::Client.get "http://wttr.in/#{URI.encode(location)}?format=4"
       bot.reply msg, response.body unless response.body.nil?
+    end
+  end.on("PRIVMSG", message: /^!id (.*)/) do |msg, match|
+    unless match.nil?
+      name = match[1]
+      id = twitch_id_by_name(name, secret)
+      bot.reply msg, "#{name} has id #{id}" unless id.nil?
     end
   end
 
