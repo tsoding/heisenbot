@@ -26,4 +26,4 @@ $ ./bin/heisenbot secret.json
 
 | Thumbnail | Link |
 | --- | --- |
-| [![thumbnail](http://i3.ytimg.com/vi/nicCW5lFxDU/default.jpg)](https://www.youtube.com/watch?v=nicCW5lFxDU) | [Programming in Ada — Part 1](https://www.youtube.com/watch?v=nicCW5lFxDU) |
+| [![thumbnail](http://i3.ytimg.com/vi/nicCW5lFxDU/default.jpg)](https://www.youtube.com/watch?v=nicCW5lFxDU) | [Crystal Programming Language](https://www.youtube.com/watch?v=nicCW5lFxDU) |
